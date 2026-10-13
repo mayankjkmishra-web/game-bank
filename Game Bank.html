@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GAME BANK — Play Beyond Limits</title>
+<style>
+:root{--bg:#090c17;--panel:#141a2b;--panel2:#202944;--line:#303957;--text:#f6f7ff;--muted:#a3adca;--cyan:#45ddff;--purple:#8b5cf6;--pink:#ff64b5;--lime:#c3ff68}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 5% 0,#302050,transparent 34%),var(--bg);color:var(--text);font:15px/1.5 "Segoe UI",Arial,sans-serif}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+header{position:sticky;top:0;z-index:10;background:#090c17ed;backdrop-filter:blur(15px);border-bottom:1px solid var(--line)}.nav{max-width:1450px;margin:auto;padding:13px 22px;display:flex;align-items:center;gap:15px}.logo{font-weight:1000;font-size:25px;letter-spacing:-1.5px;white-space:nowrap}.logo span{color:var(--cyan)}.search{flex:1}.search input{width:100%;padding:12px 15px;border-radius:12px;background:#171e32;color:white;border:1px solid var(--line)}.btn{border:0;border-radius:11px;background:var(--panel2);color:white;padding:11px 15px;font-weight:800}.btn:hover{filter:brightness(1.2)}.primary{background:linear-gradient(110deg,var(--purple),#477fff)}
+.hero{max-width:1450px;margin:22px auto;padding:0 22px}.heroBox{position:relative;overflow:hidden;padding:39px;border-radius:26px;border:1px solid #ffffff20;background:linear-gradient(110deg,#28174b,#29336c 56%,#087d8b)}.heroBox:after{content:"🎮";position:absolute;right:7%;top:18px;font-size:clamp(100px,17vw,205px);transform:rotate(-12deg);filter:drop-shadow(0 18px 18px #0005)}.heroCopy{position:relative;z-index:1;max-width:650px}.eyebrow{font-size:12px;color:var(--lime);font-weight:900;letter-spacing:2px}h1{font-size:clamp(39px,5vw,68px);line-height:.98;letter-spacing:-3px;margin:14px 0}.hero p{max-width:550px;color:#e0e6ff}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.chip{border:1px solid #ffffff25;border-radius:30px;padding:6px 11px;background:#ffffff0c;font-size:12px}
+.layout{max-width:1450px;margin:auto;padding:0 22px 40px;display:grid;grid-template-columns:190px minmax(0,1fr);gap:22px}.sidebar{position:sticky;top:80px;align-self:start;border:1px solid var(--line);border-radius:17px;background:var(--panel);padding:12px}.sideTitle{font-size:11px;color:#8390b3;font-weight:900;letter-spacing:1.4px;margin:8px 10px}.cat{width:100%;display:flex;gap:10px;align-items:center;text-align:left;padding:10px;border:0;border-radius:10px;background:transparent;color:#c7cde2;margin:2px 0}.cat:hover,.cat.active{background:#35305d;color:white}.cat.active{box-shadow:inset 3px 0 var(--cyan)}main{min-width:0}.section{margin-bottom:30px;scroll-margin-top:85px}.heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:8px 0 15px}.heading h2{margin:0;font-size:23px;letter-spacing:-.5px}.heading p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:15px}.filter{border:1px solid var(--line);background:var(--panel);color:#b9c3e0;padding:8px 13px;border-radius:30px;font-size:12px;font-weight:800}.filter.active{background:#49357b;border-color:#9272ff;color:white}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.card{min-width:0;border-radius:16px;background:var(--panel);border:1px solid #ffffff12;overflow:hidden;cursor:pointer;transition:transform .18s,border-color .18s}.card:hover{transform:translateY(-4px);border-color:#8875ff;box-shadow:0 12px 25px #0004}.cover{height:135px;display:grid;place-items:center;position:relative;overflow:hidden;font-size:57px}.cover:before{content:"";position:absolute;width:140px;height:140px;border-radius:50%;right:-30px;top:-65px;background:#ffffff15}.cover span{position:relative;z-index:1;filter:drop-shadow(0 7px 8px #0004)}.tag{position:absolute!important;left:8px;top:8px;z-index:2!important;font-size:9px!important;font-weight:900;background:#080b18cf;padding:4px 7px;border-radius:7px;filter:none!important}.heart{position:absolute;right:8px;top:7px;z-index:3;background:#080b18ce;border:0;color:white;border-radius:9px;padding:5px 8px;font-size:18px}.info{padding:11px 12px 13px}.info h3{font-size:13px;line-height:1.35;margin:0 0 7px;min-height:34px}.meta{display:flex;justify-content:space-between;gap:4px;font-size:10px;color:var(--muted)}.level{font-weight:900;color:var(--lime)}.empty{grid-column:1/-1;padding:38px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:16px}.featureStrip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}.feature{padding:17px;background:linear-gradient(130deg,#1b2442,#211735);border:1px solid var(--line);border-radius:15px}.feature b{display:block;margin-bottom:5px}.feature p{font-size:12px;color:var(--muted);margin:0}
+.modal{display:none;position:fixed;inset:0;background:#030510ed;z-index:30;align-items:center;justify-content:center;padding:14px}.modal.open{display:flex}.modalBox{width:min(850px,100%);max-height:94vh;overflow:auto;border:1px solid #ffffff25;border-radius:20px;background:#101629}.modalHead{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 17px;background:#101629;border-bottom:1px solid var(--line)}.modalHead h2{font-size:18px;margin:0}.close{border:0;background:#2a334c;color:white;border-radius:9px;padding:6px 13px;font-size:22px}.stage{text-align:center;padding:20px}.desc{color:var(--muted);font-size:13px}.stage canvas{width:100%;max-width:700px;height:auto;aspect-ratio:7/4;border:1px solid var(--line);border-radius:12px;background:#080d20;touch-action:manipulation}.controls{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:13px}.controls button{border:0;border-radius:10px;padding:10px 14px;background:#29324b;color:white}.controls .primary{background:linear-gradient(110deg,var(--purple),#477fff)}.rulesToggle{margin:0 auto 12px;display:block;border:1px solid #5a6490;border-radius:10px;padding:10px 15px;background:#242d49;color:#fff;font-weight:800}.rulesPanel{max-width:700px;margin:0 auto 16px;padding:16px 18px;text-align:left;background:#171f36;border:1px solid #475477;border-radius:13px;color:#eef2ff}.rulesPanel h3{margin:0 0 8px;color:#c3ff68}.rulesPanel p{margin:7px 0;color:#dce3fa}.rulesPanel ul{margin:7px 0;padding-left:22px}.rulesPanel li{margin:5px 0}.rulesPanel .rulesClose{margin-top:8px;border:0;border-radius:9px;padding:8px 12px;background:#3a4567;color:#fff;font-weight:700}.memory{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:480px;margin:15px auto}.memory button{height:68px;border:0;border-radius:10px;background:#252f4e;color:white;font-size:25px}.answerInput{width:min(300px,100%);background:#1b2239;color:white;border:1px solid #3a4567;border-radius:10px;padding:12px}footer{text-align:center;padding:24px;border-top:1px solid var(--line);font-size:12px;color:#8792b0}
+@media(max-width:1050px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.layout{grid-template-columns:160px minmax(0,1fr)}}@media(max-width:740px){.nav{flex-wrap:wrap;padding:11px}.search{order:3;flex-basis:100%}.hero{padding:0 12px}.heroBox{padding:25px}.heroBox:after{right:-20px;opacity:.45}.layout{display:block;padding:0 12px 30px}.sidebar{position:static;display:flex;overflow-x:auto;margin-bottom:20px}.sideTitle{display:none}.cat{width:auto;white-space:nowrap;flex-shrink:0}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cover{height:112px}.featureStrip{grid-template-columns:1fr}.heading h2{font-size:20px}}@media(max-width:380px){.info{padding:9px}.cover{height:100px}}
+</style>
+</head>
+<body>
+<header><nav class="nav">
+ <div class="logo">GAME<span>BANK</span> ✦</div>
+ <label class="search"><input id="search" placeholder="🔎 Search games..." aria-label="Search games"></label>
+ <button class="btn" onclick="pickRandom()">🎲 Surprise me</button>
+</nav></header>
+
+<section class="hero"><div class="heroBox"><div class="heroCopy">
+ <div class="eyebrow">YOUR NEXT OBSESSION STARTS HERE</div>
+ <h1>PRESS PLAY.<br>BE UNSTOPPABLE.</h1>
+ <p>Discover arcade classics, action challenges, brain puzzles and adventures. Choose your genre, select your difficulty, and beat your best.</p>
+ <button class="btn primary" onclick="$('library').scrollIntoView({behavior:'smooth'})">Explore all games ↓</button>
+ <div class="chips"><span class="chip">🎮 64 playable editions</span><span class="chip">⚡ Instant play</span><span class="chip">♥ Save favourites</span><span class="chip">🎚️ Four difficulty levels</span></div>
+</div></div></section>
+
+<div class="layout">
+<aside class="sidebar">
+ <div class="sideTitle">BROWSE GENRES</div>
+ <button class="cat active" data-cat="All">✦ All games</button>
+ <button class="cat" data-cat="Action">⚔️ Action</button>
+ <button class="cat" data-cat="Arcade">👾 Arcade</button>
+ <button class="cat" data-cat="Puzzle">🧩 Puzzle</button>
+ <button class="cat" data-cat="Brain">🧠 Brain</button>
+ <button class="cat" data-cat="Racing">🏎️ Racing</button>
+ <button class="cat" data-cat="Sports">⚽ Sports</button>
+ <button class="cat" data-cat="Adventure">🗺️ Adventure</button>
+ <button class="cat" data-cat="Strategy">♟️ Strategy</button>
+ <button class="cat" data-cat="Favourites">♥ Your favourites</button>
+</aside>
+<main>
+ <section class="section">
+  <div class="heading"><div><h2>🔥 Featured games</h2><p>Start with one of our picks.</p></div></div>
+  <div class="grid" id="featured"></div>
+ </section>
+ <div class="featureStrip">
+  <div class="feature"><b>⚡ Instant fun</b><p>No downloads, no accounts, no paid APIs.</p></div>
+  <div class="feature"><b>🎚️ Pick your challenge</b><p>Every genre has Easy, Medium, Hard and Expert.</p></div>
+  <div class="feature"><b>♥ Your collection</b><p>Save favourites directly in your browser.</p></div>
+ </div>
+ <section class="section" id="library">
+  <div class="heading"><div><h2 id="libraryTitle">🎮 Explore the bank</h2><p id="count"></p></div></div>
+  <div class="filters" id="difficultyFilters">
+   <button class="filter active" data-level="All">All levels</button>
+   <button class="filter" data-level="Easy">🟢 Easy</button>
+   <button class="filter" data-level="Medium">🔵 Medium</button>
+   <button class="filter" data-level="Hard">🟠 Hard</button>
+   <button class="filter" data-level="Expert">🔴 Expert</button>
+  </div>
+  <div class="grid" id="games"></div>
+ </section>
+</main>
+</div>
+<footer>© 2026 GAME BANK · Play smart. Play fair.<br><br>64 game editions · 16 game engines · 8 genres · Four difficulty levels.</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+ <div class="modalBox"><div class="modalHead"><h2 id="modalTitle">Game</h2><button class="close" onclick="closeGame()" aria-label="Close game">×</button></div><div class="stage" id="stage"></div></div>
+</div>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const KEY="gamebank_favourites_v2";
+const readFav=()=>{try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch{return[]}};
+const writeFav=a=>localStorage.setItem(KEY,JSON.stringify(a));
+const levels=[
+ {name:"Easy",mult:1,desc:"Relaxed pace"},
+ {name:"Medium",mult:1.45,desc:"A bigger challenge"},
+ {name:"Hard",mult:1.9,desc:"Quick reactions needed"},
+ {name:"Expert",mult:2.5,desc:"Maximum challenge"}
+];
+const engines=[
+ {name:"Meteor Blaster",genre:"Action",emoji:"🚀",kind:"meteor",color:"linear-gradient(135deg,#243d8a,#9a48c8)",featured:true,desc:"Pilot your ship, shoot incoming meteors, and survive."},
+ {name:"Dodge Zone",genre:"Action",emoji:"💥",kind:"dodge",color:"linear-gradient(135deg,#70223e,#e45372)",desc:"Dodge falling blocks for as long as possible."},
+ {name:"Neon Snake",genre:"Arcade",emoji:"🐍",kind:"snake",color:"linear-gradient(135deg,#14533e,#a0d739)",featured:true,desc:"Eat the food, grow longer, and avoid your tail."},
+ {name:"Brick Breaker",genre:"Arcade",emoji:"🧱",kind:"breakout",color:"linear-gradient(135deg,#974817,#f4bd44)",desc:"Bounce the ball and break every brick."},
+ {name:"Lightning Reflex",genre:"Arcade",emoji:"⚡",kind:"reflex",color:"linear-gradient(135deg,#84376f,#ed8056)",featured:true,desc:"Wait for green, then click as fast as you can."},
+ {name:"Whack-a-Mole",genre:"Arcade",emoji:"🐹",kind:"whack",color:"linear-gradient(135deg,#075d68,#37bfa2)",desc:"Hit the mole before it disappears."},
+ {name:"Memory Match",genre:"Puzzle",emoji:"🧠",kind:"memory",color:"linear-gradient(135deg,#075d68,#37bfa2)",featured:true,desc:"Flip cards and find all matching pairs."},
+ {name:"2048 Number Merge",genre:"Puzzle",emoji:"🔢",kind:"merge",color:"linear-gradient(135deg,#2545a5,#43a9df)",desc:"Merge matching number tiles to reach the target."},
+ {name:"Color Pop",genre:"Puzzle",emoji:"🟣",kind:"color",color:"linear-gradient(135deg,#4e258f,#d35cb7)",desc:"Clear connected colour groups to score points."},
+ {name:"Math Dash",genre:"Brain",emoji:"➗",kind:"math",color:"linear-gradient(135deg,#2545a5,#43a9df)",featured:true,desc:"Solve as many arithmetic questions as you can."},
+ {name:"Simon Memory",genre:"Brain",emoji:"🎵",kind:"simon",color:"linear-gradient(135deg,#4e258f,#d35cb7)",desc:"Remember the sequence and repeat it correctly."},
+ {name:"Typing Turbo",genre:"Brain",emoji:"⌨️",kind:"typing",color:"linear-gradient(135deg,#243d8a,#9a48c8)",desc:"Type the displayed words before time runs out."},
+ {name:"Turbo Lane",genre:"Racing",emoji:"🏎️",kind:"racing",color:"linear-gradient(135deg,#974817,#f4bd44)",featured:true,desc:"Switch lanes and avoid traffic as speed increases."},
+ {name:"Penalty Hero",genre:"Sports",emoji:"⚽",kind:"penalty",color:"linear-gradient(135deg,#11664b,#78bd62)",desc:"Choose your shot direction and beat the goalkeeper."},
+ {name:"Mini Maze",genre:"Adventure",emoji:"🗺️",kind:"maze",color:"linear-gradient(135deg,#145b85,#54c7df)",desc:"Find the exit through a maze that grows harder."},
+ {name:"Tic-Tac-Toe",genre:"Strategy",emoji:"❎",kind:"ttt",color:"linear-gradient(135deg,#514090,#6e9bfa)",desc:"Outsmart the computer and make a row of three."},
+ {name:"Neon Pong",genre:"Sports",emoji:"🏓",kind:"pong",color:"linear-gradient(135deg,#075d68,#37bfa2)",desc:"Move your paddle and send the ball past the computer."}
+];
+const games=[];
+engines.forEach((e,i)=>levels.forEach((l,j)=>games.push({
+ id:e.kind+"-"+l.name.toLowerCase(),engine:e.kind,name:e.name+" — "+l.name,
+ baseName:e.name,genre:e.genre,emoji:e.emoji,kind:e.kind,color:e.color,
+ level:l.name,mult:l.mult,desc:e.desc,featured:!!e.featured&&j===0
+})));
+let genre="All",difficulty="All",query="",cleanup=null,activeGame=null;
+function favs(){return readFav()}
+function isFav(id){return favs().includes(id)}
+function toggleFav(id,ev){if(ev)ev.stopPropagation();let a=favs();a=a.includes(id)?a.filter(x=>x!==id):[...a,id];writeFav(a);render()}
+function card(g){return `<article class="card" tabindex="0" role="button" aria-label="Play ${esc(g.name)}" onclick="play('${g.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();play('${g.id}')}">
+ <div class="cover" style="background:${g.color}"><span>${g.emoji}</span><span class="tag">${g.level.toUpperCase()}</span><button class="heart" aria-label="Toggle favourite" onclick="toggleFav('${g.id}',event)">${isFav(g.id)?"♥":"♡"}</button></div>
+ <div class="info"><h3>${esc(g.name)}</h3><div class="meta"><span>${g.genre}</span><span class="level">${g.level}</span></div></div></article>`}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function render(){
+ $("featured").innerHTML=games.filter(g=>g.featured).map(card).join("");
+ let list=games.filter(g=>(genre==="All"||(genre==="Favourites"?isFav(g.id):g.genre===genre))&&(difficulty==="All"||g.level===difficulty)&&(g.name+" "+g.genre+" "+g.desc).toLowerCase().includes(query));
+ $("games").innerHTML=list.length?list.map(card).join():'<div class="empty">No games found. Try a different genre, level or search.</div>';
+ $("count").textContent=`${list.length} games · ${games.length} total editions`;
+ $("libraryTitle").textContent=genre==="All"?"🎮 Explore the bank":genre==="Favourites"?"♥ Your favourites":`🎮 ${genre} games`;
+ document.querySelectorAll(".cat").forEach(b=>b.classList.toggle("active",b.dataset.cat===genre));
+ document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.level===difficulty));
+}
+document.querySelectorAll(".cat").forEach(b=>b.onclick=()=>{genre=b.dataset.cat;render()});
+document.querySelectorAll(".filter").forEach(b=>b.onclick=()=>{difficulty=b.dataset.level;render()});
+$("search").addEventListener("input",e=>{query=e.target.value.trim().toLowerCase();render()});
+function pickRandom(){play(games[Math.floor(Math.random()*games.length)].id)}
+function closeGame(){if(cleanup){cleanup();cleanup=null}$("modal").classList.remove("open");document.body.style.overflow="";activeGame=null}
+$("modal").addEventListener("click",e=>{if(e.target===$("modal"))closeGame()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeGame()});
+const gameRules={
+ meteor:{how:"Move your ship left and right with ← / → or A / D. Press Space to fire at the falling meteors. Do not let a meteor hit your ship.",score:"You earn 10 points for every meteor you destroy. The round ends when a meteor hits you.",tips:"Keep moving, aim under the meteors, and fire often. On harder levels, react quickly because meteors arrive faster."},
+ dodge:{how:"Move left and right with ← / → or A / D. Avoid every falling block. One collision ends the round.",score:"You earn points for staying alive; the longer you survive, the higher your score.",tips:"Watch the whole play area, move early, and avoid getting trapped near an edge. Higher levels make obstacles appear faster."},
+ snake:{how:"Use the arrow keys or W / A / S / D to guide the snake toward the food. Do not hit the wall or your own body.",score:"Each food item gives 10 points and makes the snake longer.",tips:"Plan a safe path before turning. Leave yourself room to turn as the snake grows."},
+ breakout:{how:"Move the paddle with ← / → or A / D. Bounce the ball into the bricks. If the ball falls past your paddle, the round ends.",score:"Each brick gives 10 points. Clearing every brick gives an extra 100 points.",tips:"Keep the paddle under the ball and watch where it will land. Try to send the ball toward bricks with fewer blocks around them."},
+ reflex:{how:"Press Start. Wait until the button turns green and says CLICK NOW! Then click it as quickly as you can. If you click before green, you jumped the start and must try again.",score:"Your reaction time is shown in milliseconds (ms) and seconds. A smaller time means a faster reaction. The points are higher when your reaction time is shorter.",tips:"Keep your mouse ready, stay focused, and do not click early. A normal human reaction is often a few hundred milliseconds, so aim to improve your own best time."},
+ whack:{how:"A mole 🐹 appears in one of the holes. Click the hole with the mole before it moves. Play until the timer reaches zero.",score:"Every successful hit gives 10 points.",tips:"Look across all holes, keep your cursor near the middle, and click only the hole showing the mole."},
+ memory:{how:"Click two cards to reveal them. If they match, they stay open. If they do not match, remember them because they turn back over. Find all 8 pairs.",score:"Your score starts at 1,000 and loses 10 points for each move, with a minimum score of 10. Fewer moves means a better score.",tips:"Remember the symbol and its place when you flip a card. Match known pairs first and avoid random guesses."},
+ merge:{how:"Use the arrow keys or the on-screen arrows to slide all number tiles. Two equal numbers join into one bigger number. Keep merging to reach the target shown on screen.",score:"The score is based on the biggest tile you make: the tile value multiplied by 10. Reaching the target completes the game.",tips:"Keep your largest tile in a corner and build matching numbers toward it. Do not move randomly; think one move ahead."},
+ color:{how:"Click a group of two or more touching tiles of the same colour. Only side-by-side tiles count; diagonal tiles do not. The cleared spaces refill with new colours.",score:"You earn 10 points for each tile in the group you clear. Bigger groups give more points.",tips:"Look for large connected groups before clicking. Try to make nearby same-colour tiles join into one bigger group."},
+ math:{how:"Solve each addition (+) or multiplication (×) question. Type your answer and press Answer before the timer runs out.",score:"Every correct answer gives 10 points. Wrong answers do not add points.",tips:"Answer accurately but keep a steady pace. Practise multiplication facts and check the sign in each question."},
+ simon:{how:"Watch the coloured sequence as it flashes. Click the same colours in the same order. Each new round adds another colour to remember. One wrong click ends the run.",score:"You earn 10 points for each completed round.",tips:"Say the colours quietly to yourself or remember them in small groups. Wait until the sequence finishes before tapping."},
+ typing:{how:"Type the exact word shown on the screen, then press Submit. Keep going until the timer runs out. Capital letters do not matter.",score:"A correct word gives 10 points for every letter in that word. Longer correct words earn more points; wrong words earn nothing.",tips:"Look at the whole word before typing, keep your fingers ready, and focus on accuracy as well as speed."},
+ racing:{how:"Use ← / → or A / D to switch between the three lanes. Avoid the traffic blocks. A crash ends the round.",score:"You earn points while you keep driving. Survive longer to get a higher score.",tips:"Look ahead and change lanes before a block reaches you. Avoid quick repeated lane changes. Harder levels move faster."},
+ penalty:{how:"Take turns choosing Left, Centre, or Right to shoot. The goalkeeper also chooses a direction. If the keeper chooses a different direction, you score a goal. The match ends after the listed number of shots.",score:"Each goal gives 100 points. A saved shot gives no points.",tips:"Mix up your directions instead of always choosing the same side. Remember that the goalkeeper's choice is random."},
+ maze:{how:"Guide the yellow player through the open paths using the arrow keys or the on-screen arrows. Walls block your way. Reach the green exit to finish.",score:"Completing the maze gives 100 points.",tips:"Look for a path before moving and use the open corridors. If a route is blocked, turn back and try another path."},
+ ttt:{how:"Take turns placing your mark on an empty square. Make a line of three marks across, down, or diagonally before the computer does. If all squares fill and nobody has a line, it is a draw.",score:"A win is the best result. The game shows the result at the end; use each round to practise spotting winning lines and blocking the computer.",tips:"Take a winning move whenever you see one. If you cannot win immediately, block the computer's line and try to create two possible winning moves."},
+ pong:{how:"Move your paddle up and down with ↑ / ↓ or W / S. Bounce the ball back toward the computer's paddle. If the ball passes the computer, you earn a point; when the ball passes your side, the round ends.",score:"You earn 1 point when the ball gets past the computer's paddle.",tips:"Keep your paddle lined up with the ball and watch its direction. Make small adjustments instead of moving too far."}
+};
+function rulesHTML(g){const r=gameRules[g.kind]||{how:"Follow the instructions shown inside the game.",score:"Your score is shown on the game screen.",tips:"Practise, pay attention, and try to beat your previous score."};return `<div class="rulesPanel" id="rulesPanel"><h3>📘 ${esc(g.baseName)} — Rules & Scoring</h3><p><b>How to play:</b> ${esc(r.how)}</p><p><b>How points are given:</b> ${esc(r.score)}</p><p><b>How to score more:</b> ${esc(r.tips)}</p><p><b>Difficulty:</b> ${g.level} — ${g.level==="Easy"?"a slower or more relaxed challenge.":g.level==="Medium"?"a balanced challenge.":g.level==="Hard"?"a faster or tougher challenge.":"the toughest version; expect less time or faster action."}</p><button class="rulesClose" type="button" onclick="toggleRules()">Close rules</button></div>`}
+function toggleRules(){const panel=$("rulesPanel");if(!panel)return;const hidden=panel.hidden;panel.hidden=!hidden;const b=$("rulesButton");if(b)b.setAttribute("aria-expanded",String(hidden));}
+function play(id){
+ const g=games.find(x=>x.id===id);if(!g)return;activeGame=g;
+ if(cleanup){cleanup();cleanup=null}
+ $("modalTitle").textContent=g.emoji+" "+g.name;
+ $("modal").classList.add("open");document.body.style.overflow="hidden";
+ $("stage").innerHTML=`<p class="desc">${esc(g.desc)} · <b>${g.level}</b></p><button type="button" class="rulesToggle" id="rulesButton" aria-expanded="false" onclick="toggleRules()">📘 Game Rules, Scoring & Tips</button>${rulesHTML(g).replace('id="rulesPanel"','id="rulesPanel" hidden')}<div id="mount"></div><div class="controls" id="controls"></div>`;
+ launch(g);
+}
+function controls(html){$("controls").innerHTML=html}
+function launch(g){
+ const mount=$("mount"),mult=g.mult;let stopped=false,raf=0,timers=[],score=0;
+ cleanup=()=>{stopped=true;cancelAnimationFrame(raf);timers.forEach(t=>{clearInterval(t);clearTimeout(t)});window.removeEventListener("keydown",keyDown);window.removeEventListener("keyup",keyUp)};
+ const again=()=>play(g.id);
+ const save=s=>{score=Math.max(score,s||0);let el=$("gameScore");if(el)el.textContent="Score: "+score};
+ function done(s,msg){save(s);if(msg){let p=$("gameMessage");if(p)p.textContent=msg}}
+ function addTimer(t){timers.push(t);return t}
+ let keys={};
+ function keyDown(e){keys[e.key.toLowerCase()]=true}
+ function keyUp(e){keys[e.key.toLowerCase()]=false}
+ window.addEventListener("keydown",keyDown);window.addEventListener("keyup",keyUp);
+ const buttons=(html)=>controls(html);
+ if(g.kind==="memory"){
+  const symbols=["🍉","🚀","🐸","⭐","🎯","🎲","🎧","🍕","🍉","🚀","🐸","⭐","🎯","🎲","🎧","🍕"];
+  let cards=symbols.sort(()=>Math.random()-.5),first=null,lock=false,moves=0,pairs=0;
+  mount.innerHTML='<div class="memory" id="mem"></div><p id="gameMessage">Find all matching pairs!</p><p id="gameScore">Moves: 0 · Pairs: 0/8</p>';
+  cards.forEach(s=>{let b=document.createElement("button");b.textContent="?";b.onclick=()=>{
+   if(lock||b.dataset.done)return;b.textContent=s;
+   if(!first){first={b,s};return}moves++;
+   if(first.s===s){pairs++;first.b.dataset.done=b.dataset.done="1";first.b.style.background=b.style.background="#216c62";first=null}
+   else{let f=first;first=null;lock=true;addTimer(setTimeout(()=>{if(!stopped){b.textContent="?";f.b.textContent="?";lock=false}},650))}
+   $("gameScore").textContent=`Moves: ${moves} · Pairs: ${pairs}/8`;
+   if(pairs===8)done(Math.max(10,1000-moves*10),"You matched every pair! 🎉");
+  };$("mem").appendChild(b)});
+  buttons(`<button class="primary" onclick="play('${g.id}')">Restart</button>`);return;
+ }
+ if(g.kind==="reflex"){
+  mount.innerHTML='<h2 id="gameMessage">Test your reaction!</h2><p id="gameScore">Reaction: —</p><button id="reflex" class="btn primary">Start</button>';
+  let mode="ready",start=0,t;
+  $("reflex").onclick=()=>{
+   if(mode==="ready"||mode==="done"){mode="wait";$("reflex").textContent="WAIT...";$("reflex").style.background="#b87c38";t=addTimer(setTimeout(()=>{if(stopped)return;mode="go";start=performance.now();$("reflex").textContent="CLICK NOW!";$("reflex").style.background="#238d53"},1000+Math.random()*2500))}
+   else if(mode==="wait"){clearTimeout(t);mode="done";$("gameMessage").textContent="Too early! Try again.";$("reflex").textContent="Try again"}
+   else{let ms=Math.round(performance.now()-start);mode="done";const seconds=(ms/1000).toFixed(3);done(Math.max(1,Math.round(1500/ms)),`You reacted in ${ms} milliseconds (${seconds} seconds). Nice reflexes!`);$("gameScore").textContent=`Your reaction time: ${ms} ms (${seconds} seconds) · Points: ${Math.max(1,Math.round(1500/ms))}`;$("reflex").textContent="Play again"}
+  };buttons('<span class="desc">Wait for green, then click.</span>');return;
+ }
+ if(g.kind==="math"){
+  let left=Math.round(30/mult),points=0,answer=0;
+  mount.innerHTML='<h2 id="question"></h2><p id="gameMessage">Solve as many as possible!</p><p id="gameScore"></p><form id="mathform"><input id="ans" class="answerInput" type="number" placeholder="Your answer" required><button class="btn primary">Answer</button></form>';
+  function next(){let max=Math.round(10*mult)+2,a=1+Math.floor(Math.random()*max),b=1+Math.floor(Math.random()*max),op=Math.random()<.55?"+":"×";answer=op==="+"?a+b:a*b;$("question").textContent=`${a} ${op} ${b} = ?`;$("gameScore").textContent=`Points: ${points} · Time: ${left}s`}
+  next();$("mathform").onsubmit=e=>{e.preventDefault();if(left<=0)return;if(Number($("ans").value)===answer)points+=10;$("ans").value="";next()};
+  addTimer(setInterval(()=>{if(stopped)return;left--;$("gameScore").textContent=`Points: ${points} · Time: ${left}s`;if(left<=0){done(points,"Time's up!");$("mathform").style.display="none";$("question").textContent="Round complete!"}},1000));
+  buttons(`<button class="primary" onclick="play('${g.id}')">Play again</button>`);return;
+ }
+ if(g.kind==="penalty"){
+  let goals=0,shots=0,total=Math.max(5,Math.round(8/mult));
+  mount.innerHTML='<div style="font-size:95px">🥅</div><h2 id="gameMessage">Choose your shot!</h2><p id="gameScore">Goals: 0</p><div class="controls"><button onclick="shootGB(&quot;Left&quot;)">↖ Left</button><button onclick="shootGB(&quot;Centre&quot;)">↑ Centre</button><button onclick="shootGB(&quot;Right&quot;)">↗ Right</button></div>';
+  window.shootGB=dir=>{if(stopped||shots>=total)return;shots++;let keeper=["Left","Centre","Right"][Math.floor(Math.random()*3)];if(dir!==keeper){goals++;$("gameMessage").textContent="GOAL! ⚽"}else $("gameMessage").textContent="Saved by the keeper!";$("gameScore").textContent=`Goals: ${goals} · Shots: ${shots}/${total}`;if(shots===total)done(goals*100,`Full time! You scored ${goals} goals.`)};
+  buttons(`<button class="primary" onclick="play('${g.id}')">New match</button>`);return;
+ }
+ if(g.kind==="whack"){
+  let hits=0,left=Math.round(20/mult),running=true;
+  mount.innerHTML='<h2 id="gameMessage">Hit the mole!</h2><p id="gameScore">Hits: 0 · Time: '+left+'s</p><div class="memory" id="holes"></div>';
+  let active=-1;const holes=[];
+  for(let i=0;i<9;i++){let b=document.createElement("button");b.textContent="🕳️";b.onclick=()=>{if(i===active&&running){hits++;active=-1;$("gameMessage").textContent="Nice hit!";$("gameScore").textContent=`Hits: ${hits} · Time: ${left}s`;}};$("holes").appendChild(b);holes.push(b)}
+  const tick=addTimer(setInterval(()=>{if(stopped||!running)return;holes.forEach(b=>b.textContent="🕳️");active=Math.floor(Math.random()*9);holes[active].textContent="🐹"},Math.max(300,800/mult)));
+  addTimer(setInterval(()=>{left--;$("gameScore").textContent=`Hits: ${hits} · Time: ${left}s`;if(left<=0){running=false;holes.forEach(b=>b.textContent="🕳️");done(hits*10,"Time's up!");}},1000));
+  buttons(`<button class="primary" onclick="play('${g.id}')">Play again</button>`);return;
+ }
+ if(g.kind==="simon"){
+  let seq=[],pos=0,round=0,colors=["🔴","🟢","🔵","🟡"];
+  mount.innerHTML='<h2 id="gameMessage">Repeat the sequence</h2><p id="gameScore">Round: 0</p><div class="memory" id="simon"></div>';
+  colors.forEach((c,i)=>{let b=document.createElement("button");b.textContent=c;b.style.height="90px";b.onclick=()=>{if(!seq.length)return;if(i!==seq[pos]){done(round*10,"Game over! Try again.");seq=[];return}pos++;if(pos===seq.length){round++;$("gameScore").textContent="Round: "+round;seq.push(Math.floor(Math.random()*4));pos=0;showSeq()}};$("simon").appendChild(b)});
+  function showSeq(){let k=0;const id=addTimer(setInterval(()=>{if(stopped){clearInterval(id);return}if(k>=seq.length){clearInterval(id);return}$("simon").children[seq[k]].style.filter="brightness(1.8)";addTimer(setTimeout(()=>{if(!stopped)$("simon").children[seq[k]].style.filter=""},250));k++},Math.max(350,700/mult)))}
+  seq.push(Math.floor(Math.random()*4));showSeq();buttons(`<button class="primary" onclick="play('${g.id}')">Restart</button>`);return;
+ }
+ if(g.kind==="typing"){
+  const words=["planet","rocket","puzzle","dragon","galaxy","thunder","diamond","adventure","velocity","champion","lightning","mystery","strategy","rainbow","explorer","fantastic"];
+  let points=0,left=Math.round(30/mult),word="";
+  mount.innerHTML='<h2 id="word"></h2><p id="gameMessage">Type the word shown above.</p><p id="gameScore">Points: 0 · Time: '+left+'s</p><form id="typeform"><input id="typed" class="answerInput" autocomplete="off" placeholder="Type here" required><button class="btn primary">Submit</button></form>';
+  function next(){word=words[Math.floor(Math.random()*words.length)];$("word").textContent=word;$("typed").focus()}
+  next();$("typeform").onsubmit=e=>{e.preventDefault();if(left<=0)return;if($("typed").value.trim().toLowerCase()===word)points+=Math.round(word.length*10);$("typed").value="";$("gameScore").textContent=`Points: ${points} · Time: ${left}s`;next()};
+  addTimer(setInterval(()=>{left--;$("gameScore").textContent=`Points: ${points} · Time: ${left}s`;if(left<=0){$("typeform").style.display="none";done(points,"Round complete!")}},1000));
+  buttons(`<button class="primary" onclick="play('${g.id}')">Play again</button>`);return;
+ }
+ if(g.kind==="ttt"){
+  let board=Array(9).fill(""),finished=false;
+  mount.innerHTML='<h2 id="gameMessage">You are X. Beat the computer!</h2><div class="memory" id="ttt" style="grid-template-columns:repeat(3,1fr)"></div><p id="gameScore">Wins: 0</p>';
+  let wins=0,draws=0;
+  function win(b,p){return [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].some(a=>a.every(i=>b[i]===p))}
+  function check(){if(win(board,"X")){finished=true;wins++;$("gameMessage").textContent="You win! 🎉";$("gameScore").textContent="Wins: "+wins;return true}if(win(board,"O")){finished=true;$("gameMessage").textContent="Computer wins!";return true}if(board.every(Boolean)){finished=true;draws++;$("gameMessage").textContent="It's a draw!";$("gameScore").textContent=`Wins: ${wins} · Draws: ${draws}`;return true}return false}
+  function draw(){let el=$("ttt");el.innerHTML="";board.forEach((v,i)=>{let b=document.createElement("button");b.style.height="80px";b.textContent=v;b.onclick=()=>{if(finished||board[i])return;board[i]="X";b.textContent="X";if(check())return;let empty=board.map((v,i)=>v?null:i).filter(v=>v!==null);let choice;
+    for(let p of ["O","X"]){for(let j of empty){let test=board.slice();test[j]=p;if(win(test,p)){choice=j;break}}if(choice!==undefined)break}
+    if(choice===undefined)choice=empty[Math.floor(Math.random()*empty.length)];board[choice]="O";if(check())return;draw()};el.appendChild(b)})}
+  draw();buttons(`<button class="primary" onclick="play('${g.id}')">New match</button>`);return;
+ }
+ if(g.kind==="merge"){
+  let board=Array(16).fill(0),target=Math.round(64*mult),ended=false;
+  function spawn(){let empty=board.map((v,i)=>v?null:i).filter(v=>v!==null);if(empty.length)board[empty[Math.floor(Math.random()*empty.length)]]=Math.random()<.85?2:4}
+  function draw(){let el=$("merge");el.innerHTML="";board.forEach((v,i)=>{let b=document.createElement("button");b.style.height="65px";b.style.background=v?"#"+({2:"34466b",4:"4264a0",8:"7352aa",16:"ad538d",32:"d65f70",64:"d18a3f",128:"d1b847"}[v]||"b2a7df"):"#202943";b.textContent=v||"";el.appendChild(b)});$("gameScore").textContent="Target: "+target}
+  function move(dir){if(ended)return;let old=board.join(",");for(let line=0;line<4;line++){let ids=[];for(let j=0;j<4;j++){let r,c;if(dir==="left"){r=line;c=j}else if(dir==="right"){r=line;c=3-j}else if(dir==="up"){r=j;c=line}else{r=3-j;c=line}ids.push(r*4+c)}let vals=ids.map(i=>board[i]).filter(Boolean);for(let j=0;j<vals.length-1;j++)if(vals[j]===vals[j+1]){vals[j]*=2;vals.splice(j+1,1)}while(vals.length<4)vals.push(0);ids.forEach((id,j)=>board[id]=vals[j])}if(old!==board.join(",")){spawn();draw();let max=Math.max(...board);if(max>=target){ended=true;done(max*10,"You reached the target!")}else if(board.every(Boolean)){ended=true;$("gameMessage").textContent="Board full! Try again."}}}
+  mount.innerHTML='<p id="gameMessage">Use arrow keys or buttons to merge equal numbers.</p><p id="gameScore"></p><div class="memory" id="merge"></div>';
+  board[5]=2;spawn();draw();function k(e){let map={ArrowLeft:"left",ArrowRight:"right",ArrowUp:"up",ArrowDown:"down"};if(map[e.key]){e.preventDefault();move(map[e.key])}}window.addEventListener("keydown",k);let old=cleanup;cleanup=()=>{old();window.removeEventListener("keydown",k)};
+  buttons(`<button onclick="mergeMove('left')">←</button><button onclick="mergeMove('up')">↑</button><button onclick="mergeMove('down')">↓</button><button onclick="mergeMove('right')">→</button><button class="primary" onclick="play('${g.id}')">Restart</button>`);window.mergeMove=move;return;
+ }
+ if(g.kind==="color"){
+  const colors=["🟣","🟢","🟠","🔵"],board=Array.from({length:36},()=>colors[Math.floor(Math.random()*4)]);let points=0;
+  mount.innerHTML='<p id="gameMessage">Tap groups of connected matching colours.</p><p id="gameScore">Score: 0</p><div class="memory" id="pop" style="grid-template-columns:repeat(6,1fr)"></div>';
+  function draw(){let el=$("pop");el.innerHTML="";board.forEach((c,i)=>{let b=document.createElement("button");b.style.height="48px";b.textContent=c;b.onclick=()=>{let stack=[i],seen=new Set([i]),group=[];while(stack.length){let x=stack.pop();group.push(x);[x%6?x-1:-1,x%6<5?x+1:-1,x-6,x+6].forEach(y=>{if(y>=0&&y<36&&!seen.has(y)&&board[y]===board[i]){seen.add(y);stack.push(y)}})}if(group.length<2)return;points+=group.length*10;group.forEach(x=>board[x]=null);let remain=board.filter(Boolean);while(remain.length<36)remain.unshift(colors[Math.floor(Math.random()*4)]);board.splice(0,36,...remain);$("gameScore").textContent="Score: "+points;draw()};el.appendChild(b)})}draw();buttons(`<button class="primary" onclick="play('${g.id}')">New board</button>`);return;
+ }
+ if(g.kind==="maze"){
+  const size=9,n=Array.from({length:size},()=>Array(size).fill(1));function carve(x,y){n[y][x]=0;let dirs=[[0,-2],[2,0],[0,2],[-2,0]].sort(()=>Math.random()-.5);dirs.forEach(([dx,dy])=>{let nx=x+dx,ny=y+dy;if(nx>0&&ny>0&&nx<size-1&&ny<size-1&&n[ny][nx]===1){n[y+dy/2][x+dx/2]=0;carve(nx,ny)}})}carve(1,1);n[7][7]=0;n[7][6]=0;n[6][7]=0;
+  let px=1,py=1,sz=38;mount.innerHTML='<p id="gameMessage">Reach the green exit. Use arrow keys or buttons.</p><canvas id="mazeCanvas" width="420" height="420"></canvas>';
+  const c=$("mazeCanvas"),ctx=c.getContext("2d");function draw(){ctx.fillStyle="#091323";ctx.fillRect(0,0,c.width,c.height);n.forEach((r,y)=>r.forEach((v,x)=>{ctx.fillStyle=v?"#34506c":"#11233a";ctx.fillRect(x*sz,y*sz,sz-2,sz-2)}));ctx.fillStyle="#b7f45b";ctx.fillRect(7*sz+5,7*sz+5,sz-12,sz-12);ctx.fillStyle="#ffce5d";ctx.beginPath();ctx.arc(px*sz+sz/2,py*sz+sz/2,sz*.3,0,Math.PI*2);ctx.fill()}
+  function move(dx,dy){let x=px+dx,y=py+dy;if(n[y]&&n[y][x]===0){px=x;py=y;draw();if(px===7&&py===7)done(100,"Maze completed! 🎉")}}
+  function k(e){let d={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];if(d){e.preventDefault();move(...d)}}window.addEventListener("keydown",k);let old=cleanup;cleanup=()=>{old();window.removeEventListener("keydown",k)};draw();
+  buttons(`<button onclick="mazeMoveGB(-1,0)">←</button><button onclick="mazeMoveGB(0,-1)">↑</button><button onclick="mazeMoveGB(0,1)">↓</button><button onclick="mazeMoveGB(1,0)">→</button><button class="primary" onclick="play('${g.id}')">New maze</button>`);window.mazeMoveGB=move;return;
+ }
+ // Canvas action, arcade, racing and sports engines.
+ const c=document.createElement("canvas");c.width=700;c.height=400;mount.appendChild(c);const ctx=c.getContext("2d"),W=700,H=400;
+ let frame=0,over=false,blocks=[],bullets=[],rocks=[],snake=[{x:8,y:9},{x:7,y:9},{x:6,y:9}],dir={x:1,y:0},food={x:17,y:9},ship=W/2,paddle=300,bx=350,by=250,vx=3,vy=-3,bricks=[],lane=1,ball={x:350,y:200,vx:4,vy:3},playerY=160,aiY=160;
+ for(let r=0;r<4;r++)for(let col=0;col<10;col++)bricks.push({x:20+col*66,y:35+r*27,alive:true});
+ function txt(t,x,y,s=18,col="#fff"){ctx.fillStyle=col;ctx.font=`bold ${s}px Arial`;ctx.fillText(t,x,y)}
+ function loop(){
+  if(stopped)return;frame++;ctx.fillStyle="#091022";ctx.fillRect(0,0,W,H);
+  if(g.kind==="meteor"){
+   if(!over){if(keys.arrowleft||keys.a)ship-=5*mult;if(keys.arrowright||keys.d)ship+=5*mult;ship=Math.max(20,Math.min(W-20,ship));if(keys[" "]&&frame%Math.max(4,10/mult)<1)bullets.push({x:ship,y:H-48});if(frame%Math.max(8,Math.round(36/mult))===0)rocks.push({x:15+Math.random()*(W-30),y:-20,r:12+Math.random()*12,v:(1.3+Math.random())*mult});bullets.forEach(b=>b.y-=7*mult);rocks.forEach(r=>r.y+=r.v);for(let i=rocks.length-1;i>=0;i--){let r=rocks[i];let hit=bullets.findIndex(b=>Math.hypot(b.x-r.x,b.y-r.y)<r.r+4);if(hit>=0){rocks.splice(i,1);bullets.splice(hit,1);score+=10}else if(Math.hypot(r.x-ship,r.y-(H-40))<r.r+14)over=true}bullets=bullets.filter(b=>b.y>0);rocks=rocks.filter(r=>r.y<H+30);score+=0}
+   bullets.forEach(b=>{ctx.fillStyle="#4ce8ff";ctx.fillRect(b.x-2,b.y,4,12)});rocks.forEach(r=>{ctx.fillStyle="#ff6587";ctx.beginPath();ctx.arc(r.x,r.y,r.r,0,7);ctx.fill()});txt("🚀",ship-15,H-27,27);
+  }else if(g.kind==="snake"){
+   if(keys.arrowup||keys.w){if(dir.y!==1)dir={x:0,y:-1}}if(keys.arrowdown||keys.s){if(dir.y!==-1)dir={x:0,y:1}}if(keys.arrowleft||keys.a){if(dir.x!==1)dir={x:-1,y:0}}if(keys.arrowright||keys.d){if(dir.x!==-1)dir={x:1,y:0}}
+   if(!over&&frame%Math.max(3,Math.round(8/mult))===0){let h={x:snake[0].x+dir.x,y:snake[0].y+dir.y};if(h.x<0||h.y<0||h.x>=35||h.y>=20||snake.some(s=>s.x===h.x&&s.y===h.y))over=true;else{snake.unshift(h);if(h.x===food.x&&h.y===food.y){score+=10;food={x:Math.floor(Math.random()*35),y:Math.floor(Math.random()*20)}}else snake.pop()}}
+   snake.forEach(s=>{ctx.fillStyle="#b7f45b";ctx.fillRect(s.x*20+2,s.y*20+2,16,16)});ctx.fillStyle="#ff668d";ctx.fillRect(food.x*20+4,food.y*20+4,12,12);
+  }else if(g.kind==="dodge"||g.kind==="racing"){
+   let px=g.kind==="racing"?236+lane*114:ship;if(g.kind==="racing"){ctx.fillStyle="#30394b";ctx.fillRect(180,0,340,H);ctx.setLineDash([24,22]);ctx.strokeStyle="#c6cbd6";ctx.beginPath();ctx.moveTo(293,0);ctx.lineTo(293,H);ctx.moveTo(407,0);ctx.lineTo(407,H);ctx.stroke();ctx.setLineDash([])}
+   if(!over){if(keys.arrowleft||keys.a){if(g.kind==="racing")lane=Math.max(0,lane-1);else ship-=5;keys.arrowleft=keys.a=false}if(keys.arrowright||keys.d){if(g.kind==="racing")lane=Math.min(2,lane+1);else ship+=5;keys.arrowright=keys.d=false}if(frame%Math.max(9,Math.round(34/mult))===0)blocks.push({x:g.kind==="racing"?236+Math.floor(Math.random()*3)*114:20+Math.random()*(W-40),y:-25});blocks.forEach(b=>b.y+=(3+score/1000)*mult);blocks=blocks.filter(b=>b.y<H+20);px=g.kind==="racing"?236+lane*114:ship;blocks.forEach(b=>{if(Math.abs(b.x-px)<27&&Math.abs(b.y-(H-45))<30)over=true});score+=1}
+   blocks.forEach(b=>{ctx.fillStyle="#ff5d78";ctx.fillRect(b.x-17,b.y-17,34,34)});ctx.fillStyle="#43dcff";ctx.fillRect(px-16,H-66,32,40);
+  }else if(g.kind==="breakout"){
+   if(!over){if(keys.arrowleft||keys.a)paddle-=6*mult;if(keys.arrowright||keys.d)paddle+=6*mult;paddle=Math.max(0,Math.min(W-100,paddle));bx+=vx*mult;by+=vy*mult;if(bx<8||bx>W-8)vx*=-1;if(by<8)vy=Math.abs(vy);if(by>H-28&&bx>paddle&&bx<paddle+100)vy=-Math.abs(vy);if(by>H+10)over=true;bricks.forEach(b=>{if(b.alive&&bx>b.x&&bx<b.x+60&&by>b.y&&by<b.y+17){b.alive=false;vy*=-1;score+=10}});if(bricks.every(b=>!b.alive)){over=true;done(score+100,"You cleared the bricks!")}}
+   bricks.forEach((b,i)=>{if(b.alive){ctx.fillStyle=["#ff5d76","#ffb454","#b7f45b","#35d9ff"][Math.floor(i/10)];ctx.fillRect(b.x,b.y,60,17)}});ctx.fillStyle="#fff";ctx.fillRect(paddle,H-18,100,8);ctx.fillStyle="#35d9ff";ctx.beginPath();ctx.arc(bx,by,8,0,7);ctx.fill();
+  }else if(g.kind==="pong"){
+   if(!over){if(keys.arrowup||keys.w)playerY-=5*mult;if(keys.arrowdown||keys.s)playerY+=5*mult;playerY=Math.max(0,Math.min(H-75,playerY));aiY+=((ball.y-35)-aiY)*.04*mult;ball.x+=ball.vx*mult;ball.y+=ball.vy*mult;if(ball.y<8||ball.y>H-8)ball.vy*=-1;if(ball.x<35&&ball.y>playerY&&ball.y<playerY+75)ball.vx=Math.abs(ball.vx);if(ball.x>W-35&&ball.y>aiY&&ball.y<aiY+75)ball.vx=-Math.abs(ball.vx);if(ball.x<0||ball.x>W){score+=ball.x>W?1:0;over=true}}
+   ctx.fillStyle="#45ddff";ctx.fillRect(15,playerY,12,75);ctx.fillStyle="#ff68b0";ctx.fillRect(W-27,aiY,12,75);ctx.fillStyle="#fff";ctx.beginPath();ctx.arc(ball.x,ball.y,9,0,7);ctx.fill();txt("POINTS "+score,15,24);
+  }
+  txt("SCORE "+score,15,48,16,"#c3ff68");
+  if(over){ctx.fillStyle="#050917d9";ctx.fillRect(0,0,W,H);txt(g.kind==="snake"?"GAME OVER":g.kind==="pong"?"POINT!":"ROUND OVER",230,190,34,"#ff6b9e");txt("Score: "+score,285,225,20);done(score)}
+  raf=requestAnimationFrame(loop);
+ }
+ loop();
+ buttons(`<button class="primary" onclick="play('${g.id}')">Restart</button><span class="desc">${g.kind==="meteor"?"Move: ← → / A D · Fire: Space":g.kind==="snake"?"Move: arrow keys / WASD":g.kind==="breakout"?"Move paddle: ← →":g.kind==="pong"?"Move: ↑ ↓ / W S":"Move: ← → / A D"}</span>`);
+}
+render();
+</script>
+</body>
+</html>
